@@ -9,7 +9,7 @@ inputs:
   cache:
     description: Whether to enable caching for the downloaded k3sup binary
     required: false
-    default: 'true'
+    default: 'false'
   
 runs:
     using: 'composite'
@@ -43,6 +43,6 @@ runs:
         run: |
           k3sup ready \
             --kubeconfig ~/.kube/config \
-            --context default
-
-      
+            --context default \
+            --pause 1s \
+            --attempts 60
