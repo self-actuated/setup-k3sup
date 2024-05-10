@@ -9,7 +9,8 @@ jobs:
   test-composite-action:
     runs-on: ubuntu-latest
     steps:
-    
+      - uses: actions/checkout@v4
+
       - name: Test action
         uses: ./
         with:
