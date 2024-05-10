@@ -9,14 +9,19 @@ Usage:
       - uses: actions/checkout@v4
 
       - name: Setup Kubernetes
-        uses: self-actuated/setup-k3sup@master
-        with:
-          cache: 'true'
+        uses: self-actuated/setup-k3sup@v1
           
       - name: Get nodes
         run: |
           export KUBECONFIG=~/.kube/config
           kubectl get nodes -o wide
+```
+
+The k3sup binary can be cached if desired:
+
+```yaml
+        with:
+          cache: 'true'
 ```
 
 ## Todo
