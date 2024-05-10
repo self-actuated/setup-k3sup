@@ -14,11 +14,20 @@ inputs:
 runs:
     using: 'composite'
     steps:
-      - name: Install k3sup
+      - if: inputs.cache == 'true'
+        id: cache-k3sup
+        uses: actions/cache@v4
+        with:
+          path: |
+            /usr/local/bin/k3sup
+          key: ${{ runner.os }}-${{ runner.arch }}-k3sup
+
+      - if: ${{ steps.cache-k3sup.outputs.cache-hit != 'true' }}
+        name: Install k3sup
         shell: bash
         run: |
           curl -sLS https://get.k3sup.dev | sudo -E sh
-      
+        
       - name: Install k3s and merge into kubeconfig
         shell: bash
         run: |
